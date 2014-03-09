@@ -30,11 +30,37 @@ function! RunCurrentTestFile()
   endif
 endfunction
 
+function! FindNearestTest()
+    let orig_line   = line('.')
+    let orig_col    = col('.')
+    let orig_indent = indent(orig_line)
+    let objregexp = '\v^\s*(.*def)\s+(\w+)\s*\(\s*(.*self)@!'
+
+    let flag = "Wb"
+
+    let line_no = search(objregexp, flag)
+
+    if line_no
+        normal! W
+        let test_name = expand("<cword>")
+    else
+        let test_name = 0
+    endif
+
+    call cursor(orig_line, orig_col)
+    return test_name
+endfunction
+
 function! RunNearestTest()
   if InTestFile()
-    let l:test = @% . ":" . line(".")
-    call SetLastTestCommand(l:test)
-    call RunTests(l:test)
+    let s:nearest_test = FindNearestTest()
+    if strlen(s:nearest_test) > 1
+        let l:test = @% . " -k " . s:nearest_test
+        call SetLastTestCommand(l:test)
+        call RunTests(l:test)
+    else
+        echom "No nearest test found"
+    endif
   else
     call RunLastTest()
   endif
