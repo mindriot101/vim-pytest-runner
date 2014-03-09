@@ -1,59 +1,59 @@
 let s:plugin_path = expand("<sfile>:p:h:h")
 
-if !exists("g:rspec_runner")
-  let g:rspec_runner = "os_x_terminal"
+if !exists("g:pytest_runner")
+  let g:pytest_runner = "os_x_terminal"
 endif
 
-if !exists("g:rspec_command")
-  let s:cmd = "rspec {spec}"
+if !exists("g:pytest_command")
+  let s:cmd = "py.test {test}"
 
   if has("gui_running") && has("gui_macvim")
-    let g:rspec_command = "silent !" . s:plugin_path . "/bin/" . g:rspec_runner . " '" . s:cmd . "'"
+    let g:pytest_command = "silent !" . s:plugin_path . "/bin/" . g:pytest_runner . " '" . s:cmd . "'"
   else
-    let g:rspec_command = "!clear && echo " . s:cmd . " && " . s:cmd
+    let g:pytest_command = "!clear && echo " . s:cmd . " && " . s:cmd
   endif
 endif
 
-function! RunAllSpecs()
-  let l:spec = "spec"
-  call SetLastSpecCommand(l:spec)
-  call RunSpecs(l:spec)
+function! RunAllTests()
+  let l:test = "."
+  call SetLastTestCommand(l:test)
+  call RunTests(l:test)
 endfunction
 
-function! RunCurrentSpecFile()
-  if InSpecFile()
-    let l:spec = @%
-    call SetLastSpecCommand(l:spec)
-    call RunSpecs(l:spec)
+function! RunCurrentTestFile()
+  if InTestFile()
+    let l:test = @%
+    call SetLastTestCommand(l:test)
+    call RunTests(l:test)
   else
-    call RunLastSpec()
+    call RunLastTest()
   endif
 endfunction
 
-function! RunNearestSpec()
-  if InSpecFile()
-    let l:spec = @% . ":" . line(".")
-    call SetLastSpecCommand(l:spec)
-    call RunSpecs(l:spec)
+function! RunNearestTest()
+  if InTestFile()
+    let l:test = @% . ":" . line(".")
+    call SetLastTestCommand(l:test)
+    call RunTests(l:test)
   else
-    call RunLastSpec()
+    call RunLastTest()
   endif
 endfunction
 
-function! RunLastSpec()
-  if exists("s:last_spec_command")
-    call RunSpecs(s:last_spec_command)
+function! RunLastTest()
+  if exists("s:last_test_command")
+    call RunTests(s:last_test_command)
   endif
 endfunction
 
-function! InSpecFile()
-  return match(expand("%"), "_spec.rb$") != -1 || match(expand("%"), ".feature$") != -1
+function! InTestFile()
+  return match(expand("%"), "test_.*\.py$") != -1
 endfunction
 
-function! SetLastSpecCommand(spec)
-  let s:last_spec_command = a:spec
+function! SetLastTestCommand(test)
+  let s:last_test_command = a:test
 endfunction
 
-function! RunSpecs(spec)
-  execute substitute(g:rspec_command, "{spec}", a:spec, "g")
+function! RunTests(test)
+  execute substitute(g:pytest_command, "{test}", a:test, "g")
 endfunction
