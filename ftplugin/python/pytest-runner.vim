@@ -77,3 +77,5 @@ endfunction
 function! RunTests(test)
   execute substitute(g:pytest_command, "{test}", a:test, "g")
 endfunction
+
+" vim: sw=2 ts=2
