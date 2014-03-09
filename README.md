@@ -1,16 +1,18 @@
-# rspec.vim
+# pytest-runner.vim
 
-This is a lightweight RSpec runner for Vim and MacVim.
+This is a fork of [vim-rspec](https://github.com/thoughtbot/vim-rspec) to run py.test in a similar fashion.
 
 ## Installation
 
 Recommended installation with [vundle](https://github.com/gmarik/vundle):
 
 ```vim
-Bundle 'thoughtbot/vim-rspec'
+Bundle 'mindriot101/vim-pytest-runner'
 ```
 
 If using zsh on OS X it may be necessary to move `/etc/zshenv` to `/etc/zshrc`.
+
+# Old README below, updating...
 
 ## Configuration
 
