@@ -1,21 +1,12 @@
 let s:plugin_path = expand("<sfile>:p:h:h")
 
-if !exists("g:pytest_runner")
-  let g:pytest_runner = "os_x_terminal"
-endif
-
 if !exists("g:pytest_test_regexp")
   let g:pytest_test_regexp = '\v\s*(.*def)\s+test'
 endif
 
 if !exists("g:pytest_command")
   let s:cmd = "py.test {test}"
-
-  if has("gui_running") && has("gui_macvim")
-    let g:pytest_command = "silent !" . s:plugin_path . "/bin/" . g:pytest_runner . " '" . s:cmd . "'"
-  else
-    let g:pytest_command = "!clear && echo " . s:cmd . " && " . s:cmd
-  endif
+  let g:pytest_command = "!clear && echo " . s:cmd . " && " . s:cmd
 endif
 
 function! RunAllTests()
