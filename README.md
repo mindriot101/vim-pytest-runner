@@ -52,6 +52,17 @@ moment there are two MacVim-specific runners, i.e. `os_x_terminal` and
 you want, provided you include the appropriate script inside the plugin's
 `bin/` directory.
 
+### Custom test finder
+
+If you've customised your test finder from the standard "^test", the same searcher can be used when finding a single test with `RunNearestTest` as follows:
+
+``` vim
+let g:test_regexp = "\v\s*(.*def)\s+test_"
+```
+
+to ensure an underscore at the beginning of the test function.
+
+
 #### iTerm instead of Terminal
 
 If you use iTerm, you can set `g:pytest_runner` to use the included iterm

@@ -4,6 +4,10 @@ if !exists("g:pytest_runner")
   let g:pytest_runner = "os_x_terminal"
 endif
 
+if !exists("g:pytest_test_regexp")
+  let g:pytest_test_regexp = '\v\s*(.*def)\s+test'
+endif
+
 if !exists("g:pytest_command")
   let s:cmd = "py.test {test}"
 
@@ -34,11 +38,10 @@ function! FindNearestTest()
     let orig_line   = line('.')
     let orig_col    = col('.')
     let orig_indent = indent(orig_line)
-    let objregexp = '\v^\s*(.*def)\s+(\w+)\s*\(\s*(.*self)@!'
 
     let flag = "Wb"
 
-    let line_no = search(objregexp, flag)
+    let line_no = search(g:pytest_test_regexp, flag)
 
     if line_no
         normal! ^W
