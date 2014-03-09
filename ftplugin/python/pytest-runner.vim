@@ -41,7 +41,7 @@ function! FindNearestTest()
     let line_no = search(objregexp, flag)
 
     if line_no
-        normal! W
+        normal! ^W
         let test_name = expand("<cword>")
     else
         let test_name = 0
