@@ -44,14 +44,6 @@ runners or pre-loaders. For example, to use
 let g:pytest_command = "Dispatch py.test {test}"
 ```
 
-### Custom runners
-
-Overwrite the `g:pytest_runner` variable to set a custom launch script. At the
-moment there are two MacVim-specific runners, i.e. `os_x_terminal` and
-`os_x_iterm`. The default is `os_x_terminal`, but you can set this to anything
-you want, provided you include the appropriate script inside the plugin's
-`bin/` directory.
-
 ### Custom test finder
 
 If you've customised your test finder from the standard "^test", the same searcher can be used when finding a single test with `RunNearestTest` as follows:
