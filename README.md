@@ -54,17 +54,6 @@ let g:test_regexp = "\v\s*(.*def)\s+test_"
 
 to ensure an underscore at the beginning of the test function.
 
-
-#### iTerm instead of Terminal
-
-If you use iTerm, you can set `g:pytest_runner` to use the included iterm
-launching script. This will run the specs in the last session of the current
-terminal.
-
-```vim
-let g:pytest_runner = "os_x_iterm"
-```
-
 Credits
 -------
 
