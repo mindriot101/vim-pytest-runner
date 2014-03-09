@@ -67,8 +67,6 @@ Credits
 
 The conversion to py.test was performed and maintained by Simon Walker.
 
-![thoughtbot](http://thoughtbot.com/images/tm/logo.png)
-
 The original rspec.vim is maintained by [thoughtbot, inc](http://thoughtbot.com/community)
 and [contributors](https://github.com/thoughtbot/vim-rspec/graphs/contributors)
 like you. Thank you!
